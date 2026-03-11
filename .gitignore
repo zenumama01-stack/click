@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Build artifacts (EXE and APK)
+dist/
+build/
+bin/
+*.spec
+.buildozer/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project specific
+targets/*
+!targets/.gitkeep

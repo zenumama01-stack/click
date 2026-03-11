@@ -1,0 +1,7 @@
+kivy
+pillow
+numpy
+opencv-python
+# pyautogui and win32api are NOT available on Android.
+# For Android clicking, you might need:
+# jnius (to interact with Android's Java API)
