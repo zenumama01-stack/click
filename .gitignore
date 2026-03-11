@@ -11,6 +11,7 @@ dist/
 build/
 bin/
 *.spec
+!buildozer.spec
 .buildozer/
 
 # OS files
