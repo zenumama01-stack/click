@@ -3,47 +3,23 @@ name: Build Android APK
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Build with Buildozer
+        uses: kivy/buildozer-action@master
+        with:
+          save_buildozer_config: false
+          buildozer_version: master
 
-    - name: Install tool dependencies
-      run: |
-        sudo apt-get update -y
-        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf automake libtool m4 libltdl-dev autoconf-archive pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-    - name: Upgrade build tools
-      run: |
-        pip install buildozer==1.5.0 Cython==0.29.33 python-for-android
-
-    - name: Install requirements
-      run: |
-        pip install -r requirements.txt
-
-    - name: Build with Buildozer
-      run: |
-        yes | buildozer android debug
-      env:
-        BUILDOZER_ALLOW_ORG_TEST_DOMAIN: 1
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: zenumama-click-apk
-        path: bin/*.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenumama-click-apk
+          path: bin/*.apk
