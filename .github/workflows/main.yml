@@ -26,6 +26,8 @@ jobs:
       run: |
         sudo apt-get update -y
         sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev
+        pip3 install --user Cython
+        pip3 install --user -r requirements.txt
         pip3 install --user buildozer
         pip3 install --user kivy
         echo "$HOME/.local/bin" >> $GITHUB_PATH
